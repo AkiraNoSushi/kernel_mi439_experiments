@@ -1,0 +1,19 @@
+#include "battery/batterydata.dtsi"
+#include "panel/panel.dtsi"
+#include "camera.dtsi"
+#include "input.dtsi"
+#include "ir.dtsi"
+#include "pinctrl.dtsi"
+#include "pmi.dtsi"
+#include "qrd.dtsi"
+#include "regulator.dtsi"
+#include "soc.dtsi"
+#include "thermals.dtsi"
+
+/ {
+	qcom,msm-id = <353 0x10008>;
+};
+
+&usb_otg {
+	qcom,hsusb-otg-phy-init-seq =  <0x43 0x80 0x37 0x81 0x76 0x82 0xffffffff>;
+};

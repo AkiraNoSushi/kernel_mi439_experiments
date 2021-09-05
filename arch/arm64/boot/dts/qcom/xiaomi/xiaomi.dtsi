@@ -1,0 +1,8 @@
+#include "android.dtsi"
+#include "audio.dtsi"
+#include "pinctrl.dtsi"
+#include "pm.dtsi"
+#include "ramoops.dtsi"
+#include "regulator.dtsi"
+#include "soc.dtsi"
+#include "thermals.dtsi"

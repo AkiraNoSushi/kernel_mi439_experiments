@@ -1,0 +1,65 @@
+&pmi632_vadc{
+	/delete-node/ chan@53;
+
+	chan@13 {
+		label = "quiet_therm";
+		reg = <0x13>;
+		qcom,decimation = <2>;
+		qcom,pre-div-channel-scaling = <0>;
+		qcom,calibration-type = "ratiometric";
+		qcom,scale-function = <2>;
+		qcom,hw-settle-time = <0>;
+		qcom,fast-avg-setup = <0>;
+		qcom,cal-val = <0>;
+	};
+};
+
+&pmi632_adc_tm {
+	/delete-node/ chan@53;
+
+	chan@13 {
+		label = "quiet_therm";
+		reg = <0x13>;
+		qcom,pre-div-channel-scaling = <0>;
+		qcom,calibration-type = "ratiometric";
+		qcom,scale-function = <2>;
+		qcom,hw-settle-time = <0>;
+		qcom,btm-channel-number = <0x60>;
+		qcom,thermal-node;
+	};
+};
+
+&pmi632_charger {
+	/delete-property/ qcom,sw-jeita-enable;
+
+	com,chg-term-src = <1>;
+	qcom,chg-term-current-ma = <(-200)>;
+	qcom,float-option = <1>;
+
+	qcom,auto-recharge-soc = <99>;
+	qcom,hw-jeita-enable;
+	qcom,fv-max-uv = <4400000>;
+
+	qcom,flash-disable-soc = <5>;
+};
+
+&pmi632_qg {
+	qcom,qg-iterm-ma = <350>;
+};
+
+&pmi632_vib {
+	qcom,vib-ldo-volt-uv = <2800000>;
+};
+
+&pmi632_lcdb{
+	/delete-property/ qcom,voltage-step-ramp;
+	qcom,ttw-enable;
+};
+
+&lcdb_ldo_vreg {
+	regulator-min-microvolt = <6000000>;
+};
+
+&lcdb_ncp_vreg{
+	regulator-min-microvolt = <6000000>;
+};

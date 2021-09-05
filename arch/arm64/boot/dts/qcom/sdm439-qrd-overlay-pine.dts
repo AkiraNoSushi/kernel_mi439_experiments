@@ -1,0 +1,15 @@
+/dts-v1/;
+/plugin/;
+
+#include "msm8937-interposer-sdm439.dtsi"
+#include "sdm439.dtsi"
+#include "sdm439-qrd.dtsi"
+
+#include "xiaomi/xiaomi.dtsi"
+#include "xiaomi/pine/pine.dtsi"
+
+/ {
+	model = "PINE QRD";
+	qcom,board-id = <0xb 2>;
+	qcom,pmic-id = <0x010016 0x25 0x0 0x0>;
+};

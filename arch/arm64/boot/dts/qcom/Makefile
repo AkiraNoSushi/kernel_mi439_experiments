@@ -1,3 +1,8 @@
+ifneq ($(CONFIG_MACH_XIAOMI),y)
+dtb-$(CONFIG_ARCH_QCOM)	+= apq8016-sbc.dtb msm8916-mtp.dtb
+dtb-$(CONFIG_ARCH_QCOM)	+= msm8996-mtp.dtb
+dtb-$(CONFIG_ARCH_QCOM)	+= apq8096-db820c.dtb
+
 ifeq ($(CONFIG_BUILD_ARM64_DT_OVERLAY),y)
 	dtbo-$(CONFIG_ARCH_SDM845) += \
 		sdm845-cdp-overlay.dtbo \
@@ -386,7 +391,6 @@ dtbo-$(CONFIG_ARCH_SDM632) += sdm632-rumi-overlay.dtbo \
 dtbo-$(CONFIG_ARCH_SDM439) += sdm439-mtp-overlay.dtbo \
 	sdm439-cdp-overlay.dtbo \
 	sdm439-qrd-overlay.dtbo \
-	sdm439-qrd-olive-overlay.dtbo \
 	sdm439-external-codec-mtp-overlay.dtbo \
 	sdm439-rcm-overlay.dtbo
 
@@ -505,8 +509,6 @@ sdm439-cdp-overlay.dtbo-base := sdm439.dtb \
 	msm8937-interposer-sdm439.dtb
 sdm439-qrd-overlay.dtbo-base := sdm439.dtb \
 	msm8937-interposer-sdm439.dtb
-sdm439-qrd-olive-overlay.dtbo-base := sdm439-olive.dtb \
-	msm8937-interposer-sdm439-olive.dtb
 
 sdm439-external-codec-mtp-overlay.dtbo-base := sdm439.dtb
 sdm439-rcm-overlay.dtbo-base := sdm439.dtb
@@ -672,6 +674,16 @@ dtb-$(CONFIG_ARCH_SDM429) += sdm429-mtp.dtb \
 endif
 
 dtb-$(CONFIG_ARCH_SDM845_VM) += sdm845-vm.dtb
+endif # CONFIG_MACH_XIAOMI
+
+dtbo-$(CONFIG_PROJECT_PINE) += sdm439-qrd-overlay-pine.dtbo
+dtbo-$(CONFIG_PROJECT_OLIVES) += sdm439-qrd-overlay-olives.dtbo
+dtbo-$(CONFIG_PROJECT_MI439) += sdm439-qrd-overlay-olives.dtbo \
+	sdm439-qrd-overlay-pine.dtbo
+
+sdm439-qrd-overlay-pine.dtbo-base := sdm439-qrd-overlay-pine.dtb
+sdm439-qrd-overlay-olives.dtbo-base := sdm439-qrd-overlay-olives.dtb
+
 
 always		:= $(dtb-y)
 subdir-y	:= $(dts-dirs)

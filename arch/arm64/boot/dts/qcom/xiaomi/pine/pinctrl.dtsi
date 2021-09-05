@@ -1,0 +1,36 @@
+&tlmm {
+	fm_pin {
+		fm_on: gpio_on {
+			mux {
+				pins = "gpio87";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio87";
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+
+		fm_off: gpio_off {
+			mux {
+				pins = "gpio87";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio87";
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+	};
+};
+
+&soc {
+	gpio_ldo_power {
+		compatible = "fm,fm_lan_enable";
+		qcom,fm_lan_enable_pin = <&tlmm 87 0>;
+	};
+};

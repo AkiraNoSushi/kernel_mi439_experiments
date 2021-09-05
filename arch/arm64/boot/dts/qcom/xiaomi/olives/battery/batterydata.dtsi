@@ -1,0 +1,8 @@
+/{
+	mtp_batterydata: qcom,battery-data {
+		qcom,batt-id-range-pct = <10>;
+		#include "Olive-SWD-5000mah-330kohm.dtsi"
+		#include "Olive-GY-5000mah-100kohm.dtsi"
+		#include "Olive-Default-5000mah-330kohm.dtsi"
+	};
+};

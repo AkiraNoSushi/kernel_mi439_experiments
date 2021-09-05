@@ -1,0 +1,136 @@
+&{/soc/pinctrl@1000000/spi3/cs0_sleep/config} {
+	/delete-property/ bias-disable;
+	output-high;
+};
+
+&tlmm {
+	/delete-node/ i2c_4;
+	/delete-node/ blsp2_uart2_active;
+	/delete-node/ blsp2_uart2_sleep;
+	/delete-node/ pmx_quat_mi2s;
+	/delete-node/ pmx_quat_mi2s_din;
+	/delete-node/ cdc-dmic-lines;
+
+	fm_pin {
+		fm_on: gpio_on {
+			mux {
+				pins = "gpio89";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio89";
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+
+		fm_off: gpio_off {
+			mux {
+				pins = "gpio89";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio89";
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+	};
+
+	goodix_spi_active: goodix_spi_active {
+		mux {
+			pins = "gpio85", "gpio86", "gpio87", "gpio88";
+			function = "blsp_spi7";
+		};
+
+		config {
+			pins = "gpio85", "gpio86", "gpio87", "gpio88";
+			drive-strength = <2>;
+			bias-disable = <0>;
+		};
+	};
+
+	goodix_reset_reset: goodix_reset_reset {
+		mux {
+			pins = "gpio124";
+			function = "fpc_reset_gpio_low";
+		};
+
+		config {
+			pins = "gpio124";
+			drive-strength = <2>;
+			bias-disable = <0>;
+			output-low;
+		};
+	};
+
+	goodix_reset_active: goodix_reset_active {
+		mux {
+			pins = "gpio124";
+			function = "fpc_reset_gpio_high";
+		};
+
+		config {
+			pins = "gpio124";
+			drive-strength = <2>;
+			bias-disable = <0>;
+			output-high;
+		};
+	};
+
+	goodix_irq_active: goodix_irq_active {
+		mux {
+			pins = "gpio48";
+		};
+
+		config {
+			pins = "gpio48";
+			drive-strength = <2>;
+			bias-disable = <0>;
+			input-enable;
+		};
+	};
+
+	cam_sensor_aux_reset: cam_sensor_aux_reset {
+		/* RESET */
+		mux {
+			pins = "gpio40";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio40";
+			bias-disable; /* No PULL */
+			drive-strength = <2>; /* 2 MA */
+		};
+	};
+
+	cam_sensor_aux_reset_sleep: cam_sensor_aux_reset_sleep {
+		/* RESET */
+		mux {
+			pins = "gpio40";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio40";
+			bias-disable; /* No PULL */
+			drive-strength = <2>; /* 2 MA */
+		};
+	};
+};
+
+&soc {
+	gpio_ldo_power {
+		compatible = "fm,fm_lan_enable";
+		qcom,fm_lan_enable_pin = <&tlmm 89 0>;
+	};
+};
+
+&mdss_dsi_suspend {
+	config {
+		bias-pull-up;
+	};
+};

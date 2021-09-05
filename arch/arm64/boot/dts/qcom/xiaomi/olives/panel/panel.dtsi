@@ -1,0 +1,14 @@
+#include "dsi-panel-ili9881c-hdplus-video.dtsi"
+#include "dsi-panel-ili9881h-hdplus-video_c3i.dtsi"
+#include "dsi-panel-nvt36525b-hdplus-video_c3i.dtsi"
+#include "dsi-panel-ft8006s-hdplus-video_c3i.dtsi"
+
+&mdss_dsi0_pll{
+	qcom,dsi-pll-ssc-mode = "center-spread";
+	qcom,ssc-ppm = <2500>;
+};
+
+&mdss_dsi1_pll {
+	qcom,dsi-pll-ssc-mode = "center-spread";
+	qcom,ssc-ppm = <2500>;
+};

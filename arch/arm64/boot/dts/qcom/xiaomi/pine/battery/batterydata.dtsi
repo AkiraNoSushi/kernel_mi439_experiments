@@ -1,0 +1,9 @@
+/{
+	mtp_batterydata: qcom,battery-data {
+		qcom,batt-id-range-pct = <10>;
+		#include "Peony-GY-4000mah-51kohm.dtsi"
+		#include "Peony-NVT-4000mah-41kohm.dtsi"
+		#include "Peony-SWD-4000mah-78kohm.dtsi"
+		#include "Peony-Default-4000mah-78kohm.dtsi"
+	};
+};
