@@ -1,6 +1,5 @@
 /*
  * Copyright (c) 2018-2019, The Linux Foundation. All rights reserved.
- * Copyright (C) 2021 XiaoMi, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -16,8 +15,6 @@
 #include "sdm439-pm8953.dtsi"
 #include "sdm439-pmi632.dtsi"
 #include "sdm439-audio.dtsi"
-#include "sdm439-mtp.dtsi"
-#include "sdm439-ctp.dtsi"
 
 / {
 	model = "Qualcomm Technologies, Inc. SDM439";
@@ -62,22 +59,17 @@
 			 <  960000 >,
 			 < 1305600 >,
 			 < 1497600 >,
+			 < 1708800 >,
+			 < 1804800 >,
+			 < 1958400 >,
 			 < 2016000 >;
 
 		qcom,cpufreq-table-4 =
-			 <  518400 >,
 			 <  768000 >,
 			 <  998400 >,
 			 < 1171200 >,
 			 < 1305600 >,
 			 < 1459200 >;
-	};
-
-	sn_fuse: snfuse@0xa4128 {
-		compatible = "qcom,sn-fuse";
-		reg = <0xa4128 0x4>,
-		      <0x00a0120 0x4>;
-		reg-names = "sn-base","cfi-base";
 	};
 
 	/delete-node/ qcom,cpubw;
@@ -97,9 +89,7 @@
 			<  5712 /*  748.8 MHz */ >,     /* NOM   */
 			<  6079 /*  796.8 MHz */ >,     /* NOM+  */
 			<  6445 /*  844.8 MHz */ >,
-			<  7104 /*  931.2 MHz */ >,     /* TURBO */
-			<  7759 /*  1017.0 MHz */ >,
-			<  9887 /*  1296.0 MHz */ >;
+			<  7104 /*  931.2 MHz */ >;     /* TURBO */
 	};
 
 	/delete-node/ qcom,mincpubw;
@@ -119,9 +109,7 @@
 			<  5712 /*  748.8 MHz */ >,     /* NOM   */
 			<  6079 /*  796.8 MHz */ >,     /* NOM+  */
 			<  6445 /*  844.8 MHz */ >,
-			<  7104 /*  931.2 MHz */ >,     /* TURBO */
-			<  7759 /*  1017.0 MHz */ >,
-			<  9887 /*  1296.0 MHz */ >;
+			<  7104 /*  931.2 MHz */ >;     /* TURBO */
 	};
 
 	/delete-node/ qcom,cci;
@@ -143,29 +131,31 @@
 		cpubw-cpufreq {
 		target-dev = <&cpubw>;
 		cpu-to-dev-map-0 =
-			<  960060  4248 >,
 			< 1305600  5053 >,
-			< 1497600  7104 >,
-			< 2016000  9887 >;
+			< 1497600  5712 >,
+			< 1708800  6445 >,
+			< 1804800  7104 >,
+			< 1958400  7104 >,
+			< 2016000  7104 >;
 		cpu-to-dev-map-4 =
-			<  518400  2124 >,
 			<  768000  2929 >,
 			<  998400  5053 >,
 			< 1171200  5712 >,
-			< 1305600  7104 >,
-			< 1459200  9887 >;
+			< 1305600  6079 >,
+			< 1459200  7104 >;
 
 		};
 
 		cci-cpufreq {
 		target-dev = <&cci_cache>;
 		cpu-to-dev-map-0 =
-			<  960000  400000 >,
 			< 1305600  400000 >,
 			< 1497600  400000 >,
+			< 1708800  533000 >,
+			< 1804800  576000 >,
+			< 1958400  576000 >,
 			< 2016000  576000 >;
 		cpu-to-dev-map-4 =
-			<  518400  400000 >,
 			<  768000  400000 >,
 			<  998400  400000 >,
 			< 1171200  400000 >,
@@ -192,10 +182,13 @@
 
 		CPU_COST_0: core-cost0 {
 			busy-cost-data = <
-				 960000 85
-				1305600	136
-				1497600	186
-				2016000	306
+				 800000	137
+				1305600	207
+				1497600	256
+				1708800	327
+				1804800	343
+				1958400	445
+				2016000	470
 			>;
 			idle-cost-data = <
 				100 80 60 40
@@ -203,12 +196,11 @@
 		};
 		CPU_COST_1: core-cost1 {
 			busy-cost-data = <
-				 518400 52
-				 768000	97
-				 998400	136
-				1171200	117
-				1305600	175
-				1459200	203
+				 768000	43
+				 998400	56
+				1171200	71
+				1305600	89
+				1459200	120
 			>;
 			idle-cost-data = <
 				40 20 10 8
@@ -216,9 +208,12 @@
 		};
 		CLUSTER_COST_0: cluster-cost0 {
 			busy-cost-data = <
-				 960000 61
-				1305600	71
-				1497600	85
+				 800000	49
+				1305600	61
+				1497600	71
+				1708800	85
+				1804800	88
+				1958400	110
 				2016000	120
 			>;
 			idle-cost-data = <
@@ -227,7 +222,6 @@
 		};
 		CLUSTER_COST_1: cluster-cost1 {
 			busy-cost-data = <
-				 518400 8
 				 768000	8
 				 998400	10
 				1171200	13
@@ -253,12 +247,6 @@
 		alignment = <0 0x400000>;
 		size = <0 0x800000>;
 	};
-	ramoops: ramoops@9ff00000 {
-		compatible = "ramoops";
-		reg = <0 0x9ff00000 0 0x100000>;
-		console-size = <0x80000>;
-		pmsg-size = <0x8000>;
-	};
 };
 
 &modem_mem {
@@ -266,11 +254,11 @@
 };
 
 &adsp_fw_mem {
-	reg = <0x0 0x8bd00000 0x0 0x1800000>;
+	reg = <0x0 0x8bd00000 0x0 0x1100000>;
 };
 
 &wcnss_fw_mem {
-	reg = <0x0 0x8d500000 0x0 0x700000>;
+	reg = <0x0 0x8ce00000 0x0 0x700000>;
 };
 
 &soc {
@@ -328,7 +316,6 @@
 
 	qcom,speed1-bin-v0-c0 =
 		<          0 0>,
-		<  518400000 1>,
 		<  768000000 1>,
 		<  998400000 1>,
 		< 1171200000 2>,
@@ -350,7 +337,6 @@
 
 	qcom,speed4-bin-v0-c0 =
 		<          0 0>,
-		<  518400000 1>,
 		<  768000000 1>,
 		<  998400000 1>,
 		< 1171200000 2>,
@@ -362,6 +348,8 @@
 		<  960000000 1>,
 		< 1305600000 1>,
 		< 1497600000 2>,
+		< 1708800000 3>,
+		< 1958400000 5>,
 		< 2016000000 6>;
 
 	qcom,speed4-bin-v0-cci =
@@ -371,7 +359,6 @@
 
 	qcom,speed5-bin-v0-c0 =
 		<          0 0>,
-		<  518400000 1>,
 		<  768000000 1>,
 		<  998400000 1>,
 		< 1171200000 2>,
@@ -493,14 +480,12 @@
 		< 5346 >, /* 6. DDR:662.40 MHz BIMC: 331.20 MHz */
 		< 5712 >, /* 7. DDR:748.80 MHz BIMC: 374.40 MHz */
 		< 6150 >, /* 8. DDR:796.80 MHz BIMC: 398.40 MHz */
-		< 7105 >, /* 9. DDR:931.20 MHz BIMC: 465.60 MHz */
-		< 7759 >, /* 10. DDR:1017.00 MHz BIMC: 508.50 MHz */
-		< 9887 >; /* 11. DDR:1296.00 MHz BIMC: 648.00 MHz */
+		< 7105 >; /* 9. DDR:931.20 MHz BIMC: 465.60 MHz */
 };
 
 &msm_gpu {
 	/delete-property/qcom,msm-bus,num-cases;
-	qcom,msm-bus,num-cases = <12>;
+	qcom,msm-bus,num-cases = <10>;
 	/delete-property/qcom,msm-bus,vectors-KBps;
 	qcom,msm-bus,vectors-KBps =
 		<26 512 0 0>,       /*    off        */
@@ -512,9 +497,7 @@
 		<26 512 0 5299200>, /* 6. 662.40 MHz */
 		<26 512 0 5990400>, /* 7. 748.80 MHz */
 		<26 512 0 6374400>, /* 8. 796.80 MHz */
-		<26 512 0 7449600>, /* 9. 931.20 MHz */
-		<26 512 0 8136000>, /* 10. 1017.00 MHz */
-		<26 512 0 10368000>; /* 11. 1296.00 MHz */
+		<26 512 0 7449600>; /* 9. 931.20 MHz */
 
 	qcom,gpu-speed-bin-vectors =
 		<0x6004 0x00c00000 22>,
@@ -539,45 +522,45 @@
 			qcom,gpu-pwrlevel@0 {
 				reg = <0>;
 				qcom,gpu-freq = <650000000>;
-				qcom,bus-freq = <11>;
-				qcom,bus-min = <11>;
-				qcom,bus-max = <11>;
+				qcom,bus-freq = <9>;
+				qcom,bus-min = <9>;
+				qcom,bus-max = <9>;
 			};
 
 			/* NOM+ */
 			qcom,gpu-pwrlevel@1 {
 				reg = <1>;
 				qcom,gpu-freq = <560000000>;
-				qcom,bus-freq = <10>;
-				qcom,bus-min = <9>;
-				qcom,bus-max = <11>;
+				qcom,bus-freq = <8>;
+				qcom,bus-min = <7>;
+				qcom,bus-max = <9>;
 			};
 
 			/* NOM */
 			qcom,gpu-pwrlevel@2 {
 				reg = <2>;
 				qcom,gpu-freq = <510000000>;
-				qcom,bus-freq = <9>;
-				qcom,bus-min = <8>;
-				qcom,bus-max = <10>;
+				qcom,bus-freq = <7>;
+				qcom,bus-min = <6>;
+				qcom,bus-max = <8>;
 			};
 
 			/* SVS+ */
 			qcom,gpu-pwrlevel@3 {
 				reg = <3>;
 				qcom,gpu-freq = <400000000>;
-				qcom,bus-freq = <8>;
-				qcom,bus-min = <7>;
-				qcom,bus-max = <9>;
+				qcom,bus-freq = <5>;
+				qcom,bus-min = <4>;
+				qcom,bus-max = <7>;
 			};
 
 			/* SVS */
 			qcom,gpu-pwrlevel@4 {
 				reg = <4>;
 				qcom,gpu-freq = <320000000>;
-				qcom,bus-freq = <7>;
-				qcom,bus-min = <6>;
-				qcom,bus-max = <8>;
+				qcom,bus-freq = <4>;
+				qcom,bus-min = <3>;
+				qcom,bus-max = <5>;
 			};
 
 			/* XO */
@@ -721,7 +704,6 @@
 &sdhc_1 {
 	/* DLL HSR settings. Refer go/hsr - <Target> DLL settings */
 	qcom,dll-hsr-list = <0x00076400 0x0 0x0 0x0 0x00040868>;
-	qcom,ddr-config = <0x00040868>;
 
 };
 
