@@ -1,6 +1,8 @@
-&{/soc/pinctrl@1000000/spi3/cs0_sleep/config} {
-	/delete-property/ bias-disable;
-	output-high;
+&spi3_cs0_sleep {
+	config {
+		/delete-property/ bias-disable;
+		output-high;
+	};
 };
 
 &tlmm {

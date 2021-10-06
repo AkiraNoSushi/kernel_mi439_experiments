@@ -4,13 +4,13 @@
         <&clock_gcc clk_gcc_blsp2_qup2_spi_apps_clk>;
 };
 
-&{/soc/aliases} {
-    /delete-property/ i2c4;
-};
-
 &soc {
     /delete-node/ blsp2_uart2;
     /delete-node/ i2c_4;
+
+    aliases {
+        /delete-property/ i2c4;
+    };
 
     simtray {
 		compatible = "xiaomi,simtray-status";

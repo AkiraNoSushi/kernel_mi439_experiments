@@ -60,6 +60,6 @@
 	regulator-min-microvolt = <6000000>;
 };
 
-&lcdb_ncp_vreg{
+&lcdb_ncp_vreg {
 	regulator-min-microvolt = <6000000>;
 };

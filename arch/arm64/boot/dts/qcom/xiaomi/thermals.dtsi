@@ -2,23 +2,25 @@
     bias-disable;
 };
 
-&{/soc/thermal-zones/quiet-therm-step} {
-    /delete-property/ wake-capable-sensor;
-    thermal-sensors = <&pmi632_adc_tm 0x13>;
-};
-
-&{/soc/thermal-zones/cooling-maps} {
-    /delete-node/ battery_lvl6;
-    /delete-node/ battery_lvl7;
-
-    modem_lvl2 {
-        trip = <&quiet_modem_439_trip3>;
-        cooling-device = <&modem_pa 2 2>;
+&thermal_zones {
+    quiet-therm-step {
+        /delete-property/ wake-capable-sensor;
+        thermal-sensors = <&pmi632_adc_tm 0x13>;
     };
-};
 
-&{/soc/thermal-zones/quiet-therm-adc} {
-    thermal-sensors = <&pmi632_adc_tm 0x13>;
+    quiet-therm-adc {
+        thermal-sensors = <&pmi632_adc_tm 0x13>;
+    };
+
+    cooling-maps {
+        /delete-node/ battery_lvl6;
+        /delete-node/ battery_lvl7;
+
+        modem_lvl2 {
+            trip = <&quiet_modem_439_trip3>;
+            cooling-device = <&modem_pa 2 2>;
+        };
+    };
 };
 
 &quiet_modem_439_trip1 {

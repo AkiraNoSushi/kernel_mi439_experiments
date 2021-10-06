@@ -1,13 +1,13 @@
-&{/soc/qcom,msm_fastrpc} {
-	qcom,secure-domains = <0x03>;
-};
-
 &soc {
 	sn_fuse: snfuse@0xa4128 {
 		compatible = "qcom,sn-fuse";
 		reg = <0xa4128 0x4>,
 		      <0x00a0120 0x4>;
 		reg-names = "sn-base","cfi-base";
+	};
+
+	qcom,msm_fastrpc {
+		qcom,secure-domains = <0x03>;
 	};
 };
 

@@ -1,21 +1,31 @@
-&{/soc/pinctrl@1000000/i2c_5/i2c_5_sleep/config} {
-	input-enable;
+&i2c_5_sleep {
+	config {
+		input-enable;
+	};
 };
 
-&{/soc/pinctrl@1000000/cam_sensor_mclk0_default/config} {
-	drive-strength = <4>; /* 4 MA */
+&cam_sensor_mclk0_default {
+	config {
+		drive-strength = <4>; /* 4 MA */
+	};
 };
 
-&{/soc/pinctrl@1000000/cam_sensor_mclk0_sleep/config} {
-	drive-strength = <4>; /* 4 MA */
+&cam_sensor_mclk0_sleep {
+	config {
+		drive-strength = <4>; /* 4 MA */
+	};
 };
 
-&{/soc/pinctrl@1000000/cam_sensor_mclk2_default/config} {
-	drive-strength = <4>; /* 4 MA */
+&cam_sensor_mclk2_default {
+	config {
+		drive-strength = <4>; /* 4 MA */
+	};
 };
 
-&{/soc/pinctrl@1000000/cam_sensor_mclk2_sleep/config} {
-	drive-strength = <4>; /* 4 MA */
+&cam_sensor_mclk2_sleep {
+	config {
+		drive-strength = <4>; /* 4 MA */
+	};
 };
 
 &tlmm {
