@@ -1,0 +1,3 @@
+#include "dsi-panel-ili9881c-hdplus-video_c3e.dtsi"
+#include "dsi-panel-ili9881d-hdplus-video_c3e.dtsi"
+#include "dsi-panel-jd9365z-hdplus-video_c3e.dtsi"

@@ -1,0 +1,19 @@
+&quiet_batt_439_trip1 {
+	temperature = <38000>;
+};
+
+&quiet_batt_439_trip2 {
+	temperature = <40000>;
+};
+
+&quiet_batt_439_trip3 {
+	temperature = <43000>;
+};
+
+&quiet_batt_439_trip4 {
+	temperature = <48000>;
+};
+
+&quiet_batt_439_trip5 {
+	temperature = <56000>;
+};

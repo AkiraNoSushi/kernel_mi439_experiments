@@ -1,3 +1,4 @@
+ifneq ($(CONFIG_MACH_XIAOMI),y)
 dtb-$(CONFIG_ARCH_QCOM)	+= apq8016-sbc.dtb msm8916-mtp.dtb
 dtb-$(CONFIG_ARCH_QCOM)	+= msm8996-mtp.dtb
 dtb-$(CONFIG_ARCH_QCOM)	+= apq8096-db820c.dtb
@@ -677,6 +678,16 @@ dtb-$(CONFIG_ARCH_SDM429) += sdm429-mtp.dtb \
 endif
 
 dtb-$(CONFIG_ARCH_SDM845_VM) += sdm845-vm.dtb
+endif # CONFIG_MACH_XIAOMI
+
+
+dtbo-$(CONFIG_PROJECT_PINE) += sdm439-qrd-overlay-pine.dtbo
+dtbo-$(CONFIG_PROJECT_OLIVES) += sdm439-qrd-overlay-olives.dtbo
+dtbo-$(CONFIG_PROJECT_MI439) += sdm439-qrd-overlay-olives.dtbo \
+	sdm439-qrd-overlay-pine.dtbo
+
+sdm439-qrd-overlay-pine.dtbo-base := sdm439-qrd-overlay-pine.dtb
+sdm439-qrd-overlay-olives.dtbo-base := sdm439-qrd-overlay-olives.dtb
 
 always		:= $(dtb-y)
 subdir-y	:= $(dts-dirs)

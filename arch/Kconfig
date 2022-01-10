@@ -857,10 +857,16 @@ config VMAP_STACK
 
 source "kernel/gcov/Kconfig"
 
+config MACH_XIAOMI
+    default n
+    bool "Enable if the target device is Xiaomi SDM439 device (Redmi 7A, Redmi 8, Redmi 8A and Redmi 8A Dual/Pro)"
+
 config PROJECT_PINE
     default n
+	select MACH_XIAOMI
     bool "Enable if the target device is pine (Redmi 7A)."
 
 config PROJECT_OLIVES
     default n
+	select MACH_XIAOMI
     bool "Enable if the target device belongs to the olives family (Redmi 8, Redmi 8A and Redmi 8A Dual/Pro)." 

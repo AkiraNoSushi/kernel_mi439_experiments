@@ -245,6 +245,7 @@ config ARCH_SDM439
 config PROJECT_MI439
 	bool "Enable unified support for all Xiaomi SDM439 devices"
 	default n
+	select MACH_XIAOMI
 	help
 	  This will make a build that targets all Xiaomi SDM439 devices (olive, olivewood, olivelite, pine).
 
